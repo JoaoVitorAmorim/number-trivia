@@ -1,4 +1,4 @@
 import 'dart:io';
 
 String fixture(String name) =>
-    File('numbertrivia/test/fixtures/$name').readAsStringSync();
+    File('/home/joaovitor/number-trivia/numbertrivia/test/fixtures/$name').readAsStringSync();
