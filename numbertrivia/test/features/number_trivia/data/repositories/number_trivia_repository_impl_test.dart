@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:numbertrivia/core/error/exceptions.dart';
 import 'package:numbertrivia/core/error/failures.dart';
-import 'package:numbertrivia/core/platform/networkInfo.dart';
+import 'package:numbertrivia/core/network/network_info.dart';
 import 'package:numbertrivia/features/number_trivia/data/datasources/number_trivia_local_data_source.dart';
 import 'package:numbertrivia/features/number_trivia/data/datasources/number_trivia_remote_data_source.dart';
 import 'package:numbertrivia/features/number_trivia/data/models/number_trivia_model.dart';
@@ -121,7 +121,7 @@ void main() {
       test(
         'should return last locally cached data when the cached data is present',
         () async {
-          // arrange
+          // arrange  
           when(mockLocalDataSource.getLastNumberTrivia())
               .thenAnswer((_) async => tNumberTriviaModel);
           // act
@@ -161,7 +161,7 @@ void main() {
         // arrange
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
         // act
-        repository.getRandomNumberTrivia();
+        repository.getRandomNumbertrivia();
         // assert
         verify(mockNetworkInfo.isConnected);
       },
@@ -172,12 +172,12 @@ void main() {
         'should return remote data when the call to remote data source is successful',
         () async {
           // arrange
-          when(mockRemoteDataSource.getRandomNumberTrivia())
+          when(mockRemoteDataSource.getRandomNumbertrivia())
               .thenAnswer((_) async => tNumberTriviaModel);
           // act
-          final result = await repository.getRandomNumberTrivia();
+          final result = await repository.getRandomNumbertrivia();
           // assert
-          verify(mockRemoteDataSource.getRandomNumberTrivia());
+          verify(mockRemoteDataSource.getRandomNumbertrivia());
           expect(result, equals(Right(tNumberTrivia)));
         },
       );
@@ -186,12 +186,12 @@ void main() {
         'should cache the data locally when the call to remote data source is successful',
         () async {
           // arrange
-          when(mockRemoteDataSource.getRandomNumberTrivia())
+          when(mockRemoteDataSource.getRandomNumbertrivia())
               .thenAnswer((_) async => tNumberTriviaModel);
           // act
-          await repository.getRandomNumberTrivia();
+          await repository.getRandomNumbertrivia();
           // assert
-          verify(mockRemoteDataSource.getRandomNumberTrivia());
+          verify(mockRemoteDataSource.getRandomNumbertrivia());
           verify(mockLocalDataSource.cacheNumberTrivia(tNumberTriviaModel));
         },
       );
@@ -200,12 +200,12 @@ void main() {
         'should return server failure when the call to remote data source is unsuccessful',
         () async {
           // arrange
-          when(mockRemoteDataSource.getRandomNumberTrivia())
+          when(mockRemoteDataSource.getRandomNumbertrivia())
               .thenThrow(ServerException());
           // act
-          final result = await repository.getRandomNumberTrivia();
+          final result = await repository.getRandomNumbertrivia();
           // assert
-          verify(mockRemoteDataSource.getRandomNumberTrivia());
+          verify(mockRemoteDataSource.getRandomNumbertrivia());
           verifyZeroInteractions(mockLocalDataSource);
           expect(result, equals(Left(ServerFailure())));
         },
@@ -220,7 +220,7 @@ void main() {
           when(mockLocalDataSource.getLastNumberTrivia())
               .thenAnswer((_) async => tNumberTriviaModel);
           // act
-          final result = await repository.getRandomNumberTrivia();
+          final result = await repository.getRandomNumbertrivia();
           // assert
           verifyZeroInteractions(mockRemoteDataSource);
           verify(mockLocalDataSource.getLastNumberTrivia());
@@ -235,7 +235,7 @@ void main() {
           when(mockLocalDataSource.getLastNumberTrivia())
               .thenThrow(CacheException());
           // act
-          final result = await repository.getRandomNumberTrivia();
+          final result = await repository.getRandomNumbertrivia();
           // assert
           verifyZeroInteractions(mockRemoteDataSource);
           verify(mockLocalDataSource.getLastNumberTrivia());
