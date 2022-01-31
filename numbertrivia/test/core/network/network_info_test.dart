@@ -21,10 +21,10 @@ void main() {
       when(mockDataConnectionChecker.hasConnection)
           .thenAnswer((_) => tHasConnectionFuture);
 
-      final result = await networkInfo.isConnected;
+      final result = networkInfo.isConnected;
 
       verify(mockDataConnectionChecker.hasConnection);
-      expect(result, true);
+      expect(result, tHasConnectionFuture);
     });
   });
 }
