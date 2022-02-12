@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:numbertrivia/core/error/failures.dart';
 import 'package:numbertrivia/core/usecases/usecases.dart';
@@ -7,6 +6,7 @@ import 'package:numbertrivia/features/number_trivia/domain/entities/number_trivi
 import 'package:bloc/bloc.dart';
 import 'package:numbertrivia/features/number_trivia/domain/usecases/get_concrete_number_trivia.dart';
 import 'package:numbertrivia/features/number_trivia/domain/usecases/get_random_number_trivia.dart';
+import '../../../../core/util/input_converter.dart';
 import 'number_trivia_event.dart';
 import 'number_trivia_state.dart';
 
